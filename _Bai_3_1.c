@@ -24,15 +24,15 @@
 
 #include <stdio.h>
 
-int lucas(int n) {
-    if (n == 0) return 2;
-    if (n == 1) return 1;
-    return lucas(n - 1) + lucas(n - 2);
+int lucas(int n_90) {
+    if (n_90 == 0) return 2;
+    if (n_90 == 1) return 1;
+    return lucas(n_90 - 1) + lucas(n_90 - 2);
 }
 
 int main() {
-    int n_dtn;
-    scanf("%d", &n_dtn);
-    printf("%d\n", lucas(n_dtn));
+    int n_90;
+    scanf("%d", &n_90);
+    printf("%d\n", lucas(n_90));
     return 0;
 }

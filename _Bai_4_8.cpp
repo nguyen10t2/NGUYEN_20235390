@@ -25,41 +25,41 @@
 #include <iostream>
 #include <map>
 
-template<class T>
-void print_fuzzy_set(const std::map<T, double> &a) {
+template<class T_90>
+void print_fuzzy_set(const std::map<T_90, double> &a_90) {
     std::cout << "{ ";
-    for (const auto &x : a) {
-        std::cout << "(" << x.first << ", " << x.second << ") ";
+    for (const auto &x_90 : a_90) {
+        std::cout << "(" << x_90.first << ", " << x_90.second << ") ";
     }
     std::cout << "}";
     std::cout << std::endl;
 }
 
-template <class T> 
-std::map<T, double> fuzzy_set_union(const std::map<T, double>& a, const std::map<T, double>& b) {
-    std::map<T, double> res = a;
-    for(auto it = b.begin(); it != b.end(); ++it) {
-        res[it->first] = std::max(res[it->first], it->second);
+template <class T_90> 
+std::map<T_90, double> fuzzy_set_union(const std::map<T_90, double>& a_90, const std::map<T_90, double>& b_90) {
+    std::map<T_90, double> res_90 = a_90;
+    for(auto it_90 = b_90.begin(); it_90 != b_90.end(); ++it_90) {
+        res_90[it_90->first] = std::max(res_90[it_90->first], it_90->second);
     }
-    return res;
+    return res_90;
 }
 
-template<class T>
-std::map<T, double> fuzzy_set_intersection(const std::map<T, double> &a, const std::map<T, double> &b) {
-    std::map<T, double> res;
-    for(auto it = a.begin(); it != a.end(); ++it) {
-        if(b.find(it->first) != b.end()) res[it->first] = std::min(it->second, b.at(it->first));
+template<class T_90>
+std::map<T_90, double> fuzzy_set_intersection(const std::map<T_90, double> &a_90, const std::map<T_90, double> &b_90) {
+    std::map<T_90, double> res_90;
+    for(auto it_90 = a_90.begin(); it_90 != a_90.end(); ++it_90) {
+        if(b_90.count(it_90->first)) res_90[it_90->first] = std::min(it_90->second, b_90.at(it_90->first));
     }
-    return res;
+    return res_90;
 }
 
 int main() {
-    std::map<int, double> a = {{1, 0.2}, {2, 0.5}, {3, 1}, {4, 0.6}, {5, 0.7}};
-    std::map<int, double> b = {{1, 0.5}, {2, 0.4}, {4, 0.9}, {5, 0.4}, {6, 1}};
-    std::cout << "A = "; print_fuzzy_set(a);
-    std::cout << "B = "; print_fuzzy_set(b);
-    std::map<int, double> c = fuzzy_set_union(a, b);
-    std::map<int, double> d = fuzzy_set_intersection(a, b);
-    std::cout << "Union: "; print_fuzzy_set(c);
-    std::cout << "Intersection: "; print_fuzzy_set(d);
+    std::map<int, double> a_90 = {{1, 0.2}, {2, 0.5}, {3, 1}, {4, 0.6}, {5, 0.7}};
+    std::map<int, double> b_90 = {{1, 0.5}, {2, 0.4}, {4, 0.9}, {5, 0.4}, {6, 1}};
+    std::cout << "A = "; print_fuzzy_set(a_90);
+    std::cout << "B = "; print_fuzzy_set(b_90);
+    std::map<int, double> c_90 = fuzzy_set_union(a_90, b_90);
+    std::map<int, double> d_90 = fuzzy_set_intersection(a_90, b_90);
+    std::cout << "Union: "; print_fuzzy_set(c_90);
+    std::cout << "Intersection: "; print_fuzzy_set(d_90);
 }

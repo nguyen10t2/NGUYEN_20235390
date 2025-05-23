@@ -24,23 +24,25 @@
 
 #include <stdio.h>
 
-int gcd(int a, int b){
-    if (b == 0) return a;
-    return gcd(b, a % b);
+int gcd(int a_90, int b_90){
+    if (b_90 == 0) return a_90;
+    return gcd(b_90, a_90 % b_90);
 }
 
-int gcd2(int a, int b){
-    while(b) {
-        int temp = a % b;
-        a = b;
-        b = temp;
+int gcd2(int a_90, int b_90){
+    // Sử dụng thuật toán Euclid
+    while(b_90) {
+        // Đổi giá trị a_90, b_90 = b_90, a_90 % b_90
+        int temp_90 = a_90 % b_90;
+        a_90 = b_90;
+        b_90 = temp_90;
     }
-    return a;
+    return a_90;
 }
 
 int main() {
-    int a, b;
-    scanf("%d %d", &a, &b);
-    printf("%d\n%d\n", gcd(a, b), gcd2(a, b));
+    int a_90, b_90;
+    scanf("%d %d", &a_90, &b_90);
+    printf("%d\n%d\n", gcd(a_90, b_90), gcd2(a_90, b_90));
     return 0;
 }

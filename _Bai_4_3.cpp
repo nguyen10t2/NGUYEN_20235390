@@ -28,19 +28,19 @@
 
 using Vector = std::tuple<double, double, double>;
 
-Vector cross_product(Vector a, Vector b) {
-    Vector res = {0, 0, 0};
-    std::get<0>(res) = std::get<1>(a) * std::get<2>(b) - std::get<1>(b) * std::get<2>(a);
-    std::get<1>(res) = std::get<2>(a) * std::get<0>(b) - std::get<2>(b) * std::get<0>(a);
-    std::get<2>(res) = std::get<0>(a) * std::get<1>(b) - std::get<0>(b) * std::get<1>(a);
-    return res;
+Vector cross_product(Vector a_90, Vector b_90) {
+    Vector res_90 = {0, 0, 0};
+    std::get<0>(res_90) = std::get<1>(a_90) * std::get<2>(b_90) - std::get<1>(b_90) * std::get<2>(a_90);
+    std::get<1>(res_90) = std::get<2>(a_90) * std::get<0>(b_90) - std::get<2>(b_90) * std::get<0>(a_90);
+    std::get<2>(res_90) = std::get<0>(a_90) * std::get<1>(b_90) - std::get<0>(b_90) * std::get<1>(a_90);
+    return res_90;
 }
 
 int main() {
     std::cout << std::setprecision(2) << std::fixed;
-    Vector a {1.2, 4, -0.5};
-    Vector b {1.5, -2, 2.5};
-    Vector c = cross_product(a, b);
-    std::cout << std::get<0>(c) << ' ' << std::get<1>(c) << ' ' << std::get<2>(c) << std::endl;
+    Vector a_90 {1.2, 4, -0.5};
+    Vector b_90 {1.5, -2, 2.5};
+    Vector c_90 = cross_product(a_90, b_90);
+    std::cout << std::get<0>(c_90) << ' ' << std::get<1>(c_90) << ' ' << std::get<2>(c_90) << std::endl;
     return 0;
 }

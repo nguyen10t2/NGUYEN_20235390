@@ -28,27 +28,27 @@
 #include <unordered_map>
 #include <unordered_set>
 
-std::vector<int> dijkstra(const std::vector<std::vector<std::pair<int, int>>>& a) {
-    int n = a.size();
-    std::vector<int> dist(n, INT_MAX);
-    std::vector<int> prev(n, -1);
-    dist[0] = 0;
-    using p_ii = std::pair<int, int>;
-    std::priority_queue<p_ii, std::vector<p_ii>, std::greater<p_ii>> pq;
-    pq.push({0, 0});
-    while(!pq.empty()) {
-        p_ii curr = pq.top();
-        pq.pop();
-        if(curr.first > dist[curr.second]) continue;
-        for(p_ii neigboor : a[curr.second]) {
-            if(dist[neigboor.first] > dist[curr] + neigboor.second) {
-                dist[neigboor.first] = dist[curr] + neigboor.second;
-                prev[neigboor.first] = curr;
-                pq.push({dist[neigboor.first], neigboor.first});
+std::vector<int> dijkstra(const std::vector<std::vector<std::pair<int, int>>>& a_90) {
+    int n_90 = a_90.size();
+    std::vector<int> dist_90(n_90, INT_MAX);
+    std::vector<int> prev_90(n_90, -1);
+    dist_90[0] = 0;
+    using p_ii_90 = std::pair<int, int>;
+    std::priority_queue<p_ii_90, std::vector<p_ii_90>, std::greater<p_ii_90>> pq_90;
+    pq_90.push({0, 0});
+    while(!pq_90.empty()) {
+        p_ii_90 curr_90 = pq_90.top();
+        pq_90.pop();
+        if(curr_90.first > dist_90[curr_90.second]) continue;
+        for(p_ii_90 neigboor_90 : a_90[curr_90.second]) {
+            if(dist_90[neigboor_90.first] > dist_90[curr_90.second] + neigboor_90.second) {
+                dist_90[neigboor_90.first] = dist_90[curr_90.second] + neigboor_90.second;
+                prev_90[neigboor_90.first] = curr_90.second;
+                pq_90.push({dist_90[neigboor_90.first], neigboor_90.first});
             }
         }
     }
-    return dist;
+    return dist_90;
 }
 
 int main() {

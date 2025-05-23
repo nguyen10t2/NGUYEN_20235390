@@ -28,33 +28,33 @@
 #include <cstring>
 #include <queue>
 
-void bfs(std::vector<std::list<int> > adj) {
-    std::vector<bool> visited(adj.size(), false);
-    std::queue<int> myQueue;
-    myQueue.push(1);
-    while(!myQueue.empty()) {
-        int curr = myQueue.front();
-        myQueue.pop();
-        if(visited[curr]) continue;
-        visited[curr] = true;
-        std::cout << curr << '\n';
-        for(auto it = adj[curr].begin(); it != adj[curr].end(); ++it) {
-            if(!visited[*it]) myQueue.push(*it);
+void bfs(std::vector<std::list<int> > adj_90) {
+    std::vector<bool> visited_90(adj_90.size(), false);
+    std::queue<int> myQueue_90;
+    myQueue_90.push(1);
+    while(!myQueue_90.empty()) {
+        int curr_90 = myQueue_90.front();
+        myQueue_90.pop();
+        if(visited_90[curr_90]) continue;
+        visited_90[curr_90] = true;
+        std::cout << curr_90 << '\n';
+        for(auto it_90 = adj_90[curr_90].begin(); it_90 != adj_90[curr_90].end(); ++it_90) {
+            if(!visited_90[*it_90]) myQueue_90.push(*it_90);
         }
     }
 }
 
 int main() {
-    int n = 7;
-    std::vector<std::list<int> > adj;
-    adj.resize(n + 1);
-    adj[1].push_back(2);
-    adj[2].push_back(4);
-    adj[1].push_back(3);
-    adj[3].push_back(4);
-    adj[3].push_back(5);
-    adj[5].push_back(2);
-    adj[2].push_back(7);
-    adj[6].push_back(7);
-    dfs(adj);
+    int n_90 = 7;
+    std::vector<std::list<int> > adj_90;
+    adj_90.resize(n_90 + 1);
+    adj_90[1].push_back(2);
+    adj_90[2].push_back(4);
+    adj_90[1].push_back(3);
+    adj_90[3].push_back(4);
+    adj_90[3].push_back(5);
+    adj_90[5].push_back(2);
+    adj_90[2].push_back(7);
+    adj_90[6].push_back(7);
+    bfs(adj_90);
 }

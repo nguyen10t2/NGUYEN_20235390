@@ -24,35 +24,38 @@
 
 #include <iostream>
 #include <stack>
-
 using namespace std;
 
 struct state{
-    int i, j, old_L;
+    int i_90, j_90, old_L_90;
     //# constructor
-    state(int _i = 0, int _j = 0, int _L = 0):
-        i(_i), j(_j), old_L(_L){}
+    state(int _i_90 = 0, int _j_90 = 0, int _L_90 = 0):
+        i_90(_i_90), j_90(_j_90), old_L_90(_L_90){}
 };
 
 int main() {
-    int n, k;
-    cin >> n >> k;
-    int x[n + 1];
-    stack<state> s;
+    int n_90, k_90;
+    cin >> n_90 >> k_90;
+    int x_90[n_90 + 1];
+    stack<state> s_90;
     //# number of consecutive suffix 1
-    s.push(state());
-    while (!s.empty()){
-        state top = s.top();
-        s.pop();
-        x[top.i] = top.j;
-        if(top.i >= n) {
-            for(int i = 1; i <= n; ++i) cout << x[i] << ' ';
+    s_90.push(state());
+    while (!s_90.empty()){
+        // Lấy trạng thái trên cùng
+        state top_90 = s_90.top();
+        s_90.pop();
+        // gán giá trị cho x[i] như trong thuật toán đệ quy
+        x_90[top_90.i_90] = top_90.j_90;
+        // Nếu đã thử hết các phần tử
+        if(top_90.i_90 >= n_90) {
+            for(int i_90 = 1; i_90 <= n_90; ++i_90) cout << x_90[i_90] << ' ';
             cout << '\n';
             continue;
         }
-        int L = top.j ? top.old_L + 1 : 0;
-        if(L + 1 != k) s.push(state(top.i + 1, 1, L));
-        s.push(state(top.i + 1, 0, L));
+        // Tính toán L và thêm trạng thái mới vào stack ngược so với thuật toán đệ quy
+        int L_90 = top_90.j_90 ? top_90.old_L_90 + 1 : 0;
+        if(L_90 + 1 != k_90) s_90.push(state(top_90.i_90 + 1, 1, L_90));
+        s_90.push(state(top_90.i_90 + 1, 0, L_90));
     }
     return 0;
 }

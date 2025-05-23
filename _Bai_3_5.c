@@ -25,38 +25,43 @@
 #include <stdio.h>
 #include <string.h>
 
-int binom(int n, int k) {
-    if (k > n) return 0;
-    if (k == 0) return 1;
-    return binom(n-1, k) + binom(n-1, k-1);
+int binom(int n_90, int k_90) {
+    if (k_90 > n_90) return 0;
+    if (k_90 == 0) return 1;
+    return binom(n_90-1, k_90) + binom(n_90-1, k_90-1);
 }
 
-//# Chuản bị bảng tra
-int look_up[37][19];
+//# Chuẩn bị bảng tra
+int look_up_90[37][19];
 
 void init() {
-    memset(look_up, 0, sizeof(look_up));
+    memset(look_up_90, 0, sizeof(look_up_90));
 }
 
-int binom2(int n, int k){
-    if (k > n) return 0;
-    if (k == 0) return 1;
-    if (look_up[n][k]) return look_up[n][k];
-    look_up[n][k] = binom2(n - 1, k) + binom2(n - 1, k - 1);
-    return look_up[n][k];
+int binom2(int n_90, int k_90){
+    // Nếu k_90 > n_90 thì không tồn tại tổ hợp
+    if (k_90 > n_90) return 0;
+    // Nếu k_90 = 0 thì C(n_90, 0) = 1
+    if (k_90 == 0) return 1;
+    // Nếu đã tính toán rồi thì trả về giá trị đã tính
+    if (look_up_90[n_90][k_90]) return look_up_90[n_90][k_90];
+    // Nếu chưa tính toán thì tính toán
+    look_up_90[n_90][k_90] = binom2(n_90 - 1, k_90) + binom2(n_90 - 1, k_90 - 1);
+    // Lưu kết quả vào bảng tra và trả về kết quả
+    return look_up_90[n_90][k_90];
 }
 
 int main() {
-    int m;
-    scanf("%d", &m);
-    for (int n = 1; n <= m; ++n){
-        for (int k = 0; k <= n; ++k)
-            printf("%d ", binom(n, k));
+    int m_90;
+    scanf("%d", &m_90);
+    for (int n_90 = 1; n_90 <= m_90; ++n_90) {
+        for (int k_90 = 0; k_90 <= n_90; ++k_90)
+            printf("%d ", binom(n_90, k_90));
         printf("\n");
     }
-    for (int n = 1; n <= m; ++n){
-        for (int k = 0; k <= n; ++k)
-            printf("%d ", binom2(n, k));
+    for (int n_90 = 1; n_90 <= m_90; ++n_90) {
+        for (int k_90 = 0; k_90 <= n_90; ++k_90)
+            printf("%d ", binom2(n_90, k_90));
         printf("\n");
     }
     return 0;

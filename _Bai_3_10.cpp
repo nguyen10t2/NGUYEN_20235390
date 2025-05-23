@@ -45,6 +45,8 @@ std::vector<std::string> generate(int n, int k) {
 }
 
 int main() {
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
     int t = 0, n = 0, k = 0;
     std::cin >> t;
     while(t--) {

@@ -24,37 +24,40 @@
 
 #include <iostream>
 #include <vector>
-#include <list>
-#include <cstring>
 #include <stack>
+#define MAX_90 0x7fffffff
 
-void dfs(std::vector<std::list<int> > adj_90) {
-    std::vector<bool> visited_90(adj_90.size(), false);
-    std::stack<int> myStack_90;
-    myStack_90.push(1);
-    while(!myStack_90.empty()) {
-        int curr_90 = myStack_90.top();
-        myStack_90.pop();
-        if(visited_90[curr_90]) continue;
-        visited_90[curr_90] = true;
-        std::cout << curr_90 << '\\n';
-        for(auto it_90 = adj_90[curr_90].rbegin(); it_90 != adj_90[curr_90].rend(); ++it_90) {
-            if(!visited_90[*it_90]) myStack_90.push(*it_90);
+int global_size_90;
+std::vector<int> global_map_90;
+
+void input() {
+    std::cin >> global_size_90;
+    global_map_90.resize(global_size_90);
+    for(int i = 0; i < global_size_90; ++i) std::cin >> global_map_90[i];
+}
+
+int solution() {
+    global_map_90.push_back(0);
+    std::stack<int> open_stack_90;
+    int best_90 = -MAX_90;
+    // open_stack_90.push(0);
+    for(int i = 0; i < global_map_90.size(); ++i) {
+        while(!open_stack_90.empty() && global_map_90[i] < global_map_90[open_stack_90.top()]) {
+            int height_90 = global_map_90[open_stack_90.top()];
+            open_stack_90.pop();
+            int wight_90 = open_stack_90.empty() ? i : (i - open_stack_90.top() - 1);
+            best_90 = std::max(best_90, height_90 * wight_90);
         }
+        open_stack_90.push(i);
     }
+    return best_90;
+}
+
+void output() {
+    std::cout << solution();
 }
 
 int main() {
-    int n_90 = 7;
-    std::vector<std::list<int> > adj_90;
-    adj_90.resize(n_90 + 1);
-    adj_90[1].push_back(2);
-    adj_90[2].push_back(4);
-    adj_90[1].push_back(3);
-    adj_90[3].push_back(4);
-    adj_90[3].push_back(5);
-    adj_90[5].push_back(2);
-    adj_90[2].push_back(7);
-    adj_90[6].push_back(7);
-    dfs(adj_90);
+    input();
+    output();
 }

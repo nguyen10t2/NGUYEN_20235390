@@ -90,8 +90,10 @@ void not_recuise() {
 }
 
 int main() {
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
     std::cin >> n >> k1 >> k2;
-    // recuise("0", 0);
-    // recuise("1", 1);
-    not_recuise();
+    recuise("0", 0);
+    recuise("1", 1);
+    // not_recuise();
 }

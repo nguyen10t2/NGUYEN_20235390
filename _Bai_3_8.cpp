@@ -2,78 +2,74 @@
 #include <stack>
 #include <vector>
 
-int M;
+int M_90;
 
-void print(int *m, int *x, int n) {
-    for (int i = 1; i <= n; ++i){
-        if (x[i] == -1) std::cout << '-' << m[i];
-        if (x[i] == 1) std::cout << '+' << m[i];
+void print(int *m_90, int *x_90, int n_90) {
+    for (int i_90 = 1; i_90 <= n_90; ++i_90) {
+        if (x_90[i_90] == -1) std::cout << '-' << m_90[i_90];
+        if (x_90[i_90] == 1)  std::cout << '+' << m_90[i_90];
     }
-    std::cout << "=" << M;
+    std::cout << "=" << M_90;
 }
-
-void TRY(int *m, int *x, int n, int sum, int i) {
-    if(i == n + 1) {
-        if(sum == M) {
-            print(m, x, n);
+//# Đệ quy quay lui
+void TRY(int *m_90, int *x_90, int n_90, int sum_90, int i_90) {
+    if (i_90 == n_90 + 1) {
+        if (sum_90 == M_90) {
+            print(m_90, x_90, n_90);
             exit(0);
         }
         return;
     }
 
-    x[i] = -1;
-    TRY(m, x, n, sum - m[i], i + 1);
+    x_90[i_90] = -1;
+    TRY(m_90, x_90, n_90, sum_90 - m_90[i_90], i_90 + 1);
 
-    x[i] = 0;
-    TRY(m, x, n, sum, i + 1);
+    x_90[i_90] = 0;
+    TRY(m_90, x_90, n_90, sum_90, i_90 + 1);
 
-    x[i] = 1;
-    TRY(m, x, n, sum + m[i], i + 1);
+    x_90[i_90] = 1;
+    TRY(m_90, x_90, n_90, sum_90 + m_90[i_90], i_90 + 1);
 }
 
 int main() {
-    int n;
-    std::cin >> n >> M;
-    int m[n+1];
-    int x[n+1];
-    for (int i = 1; i <= n; ++i) std::cin >> m[i];
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    int n_90;
+    std::cin >> n_90 >> M_90;
+    int m_90[n_90+1];
+    int x_90[n_90+1];
+    for (int i_90 = 1; i_90 <= n_90; ++i_90)
+        std::cin >> m_90[i_90];
 
-    // TRY(m, x, n, 0, 1);
+    // Sử dụng tuple để lưu trữ trạng thái
+    using state_90 = std::tuple<int, int, int>;
+    // Sử dụng stack để thay thế đệ quy
+    std::stack<state_90> myStack_90;
+    myStack_90.push({0, 0, 0}); // {sum, index, sign}
 
-    // Tuple bộ ba số nguyên
-    using state = std::tuple<int, int, int>;
-    // Khởi tạo stack
-    std::stack<state> myStack;
-    // Đẩy vào stack trạng thái ban đầu (mảng tính từ 1)
-    myStack.push({0, 0, 0});
-    // Duyệt stack
-    while(!myStack.empty()) {
+    while (!myStack_90.empty()) {
         // Lấy trạng thái trên cùng
-        state top = myStack.top();
-        // Lấy chỉ số i, x[i], và tổng sum
-        int i = std::get<1>(top);
-        x[i] = std::get<2>(top);
-        int sum = std::get<0>(top);
-        // Xóa trạng thái trên cùng
-        myStack.pop();
+        state_90 top_90 = myStack_90.top();
+        myStack_90.pop();
+        // gán giá trị cho x[i] như trong thuật toán đệ quy
+        int i_90   = std::get<1>(top_90);
+        x_90[i_90] = std::get<2>(top_90);
+        int sum_90 = std::get<0>(top_90) + m_90[i_90] * x_90[i_90];
         // Nếu đã thử hết các phần tử
-        if(i == n + 1) {
-            // Nếu tổng bằng M thì in ra
-            if(sum == M) {
-                print(m, x, n);
+        if (i_90 == n_90 + 1) {
+            if (sum_90 == M_90) {
+                print(m_90, x_90, n_90);
                 return 0;
             }
-            // Nếu không thì tiếp tục
             continue;
         }
-        // Nếu chưa thử hết các phần tử thì thử 3 trường hợp
-        // 1. Không chọn phần tử i
-        // 2. Chọn phần tử i với dấu +
-        // 3. Chọn phần tử i với dấu -
-        sum += + m[i] * x[i];
-        myStack.push({sum, i + 1, -1});
-        myStack.push({sum, i + 1, 0});
-        myStack.push({sum, i + 1, 1});
+
+        // Thử thêm các trạng thái vào stack
+        // 1. +m[i],
+        // 2. 0
+        // 3. -m[i]
+        myStack_90.push({sum_90, i_90 + 1, -1});
+        myStack_90.push({sum_90, i_90 + 1, 1});
     }
 
     std::cout << -1;

@@ -90,10 +90,12 @@ void solution() {
             bool flag = false;
             // Duyệt từng thành phần của tổ hợp
             for(short city: _) {
+                // Nếu đường gãy đánh dấu và thoát khỏi vòng lặp
                 if(graph[curr][city] == -1) {
                     flag = true;
                     break;
                 }
+                // Cộng dồn chi phí
                 cost += graph[curr][city];
                 curr = city;
             }

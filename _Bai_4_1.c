@@ -26,50 +26,50 @@
 #include <stdlib.h>
 
 typedef struct Node {
-    int data;
-    struct Node* next;
+    int data_90;
+    struct Node* next_90;
 } Node;
 
-Node* prepend(Node* head, int data) {
-    Node* newNode = (Node*)malloc(sizeof(Node));
-    newNode->data = data;
-    newNode->next = head;
-    return newNode;
+Node* prepend(Node* head_90, int data_90) {
+    Node* newNode_90 = (Node*)malloc(sizeof(Node));
+    newNode_90->data_90 = data_90;
+    newNode_90->next_90 = head_90;
+    return newNode_90;
 }
 
-void print(Node* head) {
-    Node* curr = head;
-    while(curr != NULL) {
-        printf("%d ", curr->data);
-        curr = curr->next;
+void print(Node* head_90) {
+    Node* curr_90 = head_90;
+    while(curr_90 != NULL) {
+        printf("%d ", curr_90->data_90);
+        curr_90 = curr_90->next_90;
     }
     printf("\n");
 }
 
-Node* reverse(Node* head) {
-    Node* prev = NULL;
-    Node* curr = head;
-    while(curr != NULL) {
-        Node* nextNode = curr->next;
-        curr->next = prev;
-        prev = curr;
-        curr = nextNode;
+Node* reverse(Node* head_90) {
+    Node* prev_90 = NULL;
+    Node* curr_90 = head_90;
+    while(curr_90 != NULL) {
+        Node* nextNode_90 = curr_90->next_90;
+        curr_90->next_90 = prev_90;
+        prev_90 = curr_90;
+        curr_90 = nextNode_90;
     }
-    return prev;
+    return prev_90;
 }
 
 int main() {
-    int n, u;
-    scanf("%d", &n);
-    Node* head = NULL;
-    for(int i = 0; i < n; ++i) {
-        scanf("%d", &u);
-        head = prepend(head, u);
+    int n_90, u_90;
+    scanf("%d", &n_90);
+    Node* head_90 = NULL;
+    for(int i = 0; i < n_90; ++i) {
+        scanf("%d", &u_90);
+        head_90 = prepend(head_90, u_90);
     }
     printf("Original list: ");
-    print(head);
-    head = reverse(head);
+    print(head_90);
+    head_90 = reverse(head_90);
     printf("Reversed list: ");
-    print(head);
+    print(head_90);
     return 0;
 }
